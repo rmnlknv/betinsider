@@ -1,0 +1,41 @@
+<%= form_for(@prediction) do |f| %>
+  <% if @prediction.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@prediction.errors.count, "error") %> prohibited this prediction from being saved:</h2>
+
+      <ul>
+      <% @prediction.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :discipline %><br>
+    <%= f.text_field :discipline %>
+  </div>
+  <div class="field">
+    <%= f.label :bettype %><br>
+    <%= f.text_field :bettype %>
+  </div>
+  <div class="field">
+    <%= f.label :info %><br>
+    <%= f.text_field :info %>
+  </div>
+  <div class="field">
+    <%= f.label :date %><br>
+    <%= f.datetime_local_field :date %>
+  </div>
+  <div class="field">
+    <%= f.label :price %><br>
+    <%= f.text_field :price %>
+  </div>
+  <div class="field">
+    <%= f.label :status %></br>
+    <%= f.text_field :status %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

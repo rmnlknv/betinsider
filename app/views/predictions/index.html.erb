@@ -1,0 +1,49 @@
+<br />
+prediction list <br />
+<%= current_user.name %><br />
+<%= current_user.surname %><br />
+<%= current_user.balance %>
+
+
+<h1>Listing predictions</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Discipline</th>
+      <th>Type</th>
+      <th>Info</th>
+      <th>Datetime</th>
+      <th>Price</th>
+      <th>Status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @predictions.each do |prediction| %>
+    
+    <% if current_user.predictions.where(id: prediction).any? %> 
+        <% owned = true %> 
+    <% else %> 
+        <% owned = false %>
+    <% end %>
+
+      <tr>
+        <td><%= prediction.discipline %></td>
+        <td><%= prediction.bettype %></td>
+        <td><% if owned %> <%= prediction.info %> <% else %> have to buy <% end %></td>
+        <td><%= prediction.date %></td>
+        <td><%= prediction.price %></td>
+        <td><%= prediction.status %></td>
+        <td><% if owned %> Owned <% else %>
+        <%= link_to 'Buy', prediction, data: { confirm: 'Are you sure that you want buy this prediction? ' } %><% end %></td>
+
+        <td><%= link_to 'Destroy', prediction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Prediction', new_prediction_path %>

@@ -1,0 +1,6 @@
+profile
+<br />
+<%= current_user.name %><br />
+<%= current_user.surname %><br />
+<%= current_user.birthday < Date.new(1998,current_user.birthday.month,current_user.birthday.day) %><br />
+<%= current_user.birthday.day %> - <%= current_user.birthday.month %> - <%= current_user.birthday.year %>

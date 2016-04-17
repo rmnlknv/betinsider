@@ -1,16 +1,9 @@
-<br />
-prediction list <br />
-<%= current_user.name %><br />
-<%= current_user.surname %><br />
-<%= current_user.balance %>
-
-
 <h1>Список прогнозов</h1>
-<table>
+<!--<table>
   <thead>
     <tr>
       <th>Вид спорта</th>
-      <!--<th>Тип</th>-->
+      <th>Тип</th>-
       <th>Информация о ставке</th>
       <th>Дата и время</th>
       <th>Цена</th>
@@ -30,7 +23,7 @@ prediction list <br />
 
       <tr>
         <td><%= prediction.discipline %></td>
-        <!--<td><%= prediction.bettype %></td>-->
+        <td><%= prediction.bettype %></td>
         <td><% if owned %> <%= prediction.info %> <% else %> have to buy <% end %></td>
         <td><%= prediction.date.strftime("%d-%m-%Y %H-%M") %></td>
         <td><%= prediction.price %></td>
@@ -44,6 +37,48 @@ prediction list <br />
   </tbody>
 </table>
 
-<br>
+<br> -->
 
-<%= link_to 'New Prediction', new_prediction_path %>
+<div class="table-responsive">          
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Спорт</th>
+        <th>Информация</th>
+        <th>Дата и время</th>
+        <th>Цена</th>
+        <th>Состояние</th>
+        <th>Покупка</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% @predictions.each do |prediction| %>
+
+        <% if current_user.predictions.where(id: prediction).any? %> 
+            <% owned = true %> 
+        <% else %> 
+            <% owned = false %>
+        <% end %>
+
+      <tr>
+        <td><%= prediction.discipline %></td>
+        <td><% if owned %> <%= prediction.info %> <% else %> Для просмотра необходимо купить. <% end %></td>
+        <td><%= prediction.date.strftime("%d-%m-%Y %H-%M") %></td>
+        <td><%= prediction.price %></td>
+        <td><%= prediction.status %></td>
+        <td>
+        <% if owned %> 
+          Куплено 
+        <% else %>
+          <%= link_to 'Купить', prediction, data: { confirm: 'Вы уверены, что хотите купить этот прогноз? ' } %>
+        <% end %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  </div>
+
+  <br>
+
+<!-- <%= link_to 'Добавить прогноз', new_prediction_path %> -->

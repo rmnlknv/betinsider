@@ -14,21 +14,20 @@
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
-                    <a href="#">
-                        BetInsider
-                    </a>
+                    <%= link_to 'BetInsider', root_path %>
                 </li>
-                <li>
+                <!--<li>-->
                 	<% if user_signed_in? %>
-    					<span>Здравствуйте, <%= current_user.email %>. Balance: <%= current_user.balance %></span>
-    					<%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
+    					<li>Здравствуйте, <%= current_user.name %></li>
+                        <li>Баланс: <%= current_user.balance.to_s + " BM" %></li>
+                        <li><a href="">Пополнить баланс</a></li>
 					<% else %>
-    					<%= link_to 'Войти', new_user_session_path %>
-    					<%= link_to 'Зарегистрироваться', new_user_registration_path %>
+    					<li><%= link_to 'Войти', new_user_session_path %></li>
+    					<li><%= link_to 'Зарегистрироваться', new_user_registration_path %></li>
 					<% end %>
-				</li>
+				<!--</li>-->
                 <li>
-                    <a href="#">Прогнозы</a>
+                    <%= link_to 'Прогнозы', predictions_path %>
                 </li>
                 <li>
                     <a href="#">Статистика</a>
@@ -39,6 +38,9 @@
                 <li>
                     <a href="#">Контакты</a>
                 </li>
+                <% if user_signed_in? %>
+                    <li><%= link_to 'Выйти', destroy_user_session_path, :method => :delete %></li>
+                <% end %>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->

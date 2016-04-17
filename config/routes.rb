@@ -6,11 +6,11 @@ Rails.application.routes.draw do
 
   root 'static_pages#index'
 
-  get 'users/profile', as: 'user_root'
+  #get 'users/profile', as: 'user_root'
 
-  resources :predictions, only: [:index, :new, :create]
+  resources :predictions, only: [:index, :new, :create, :destroy]
 
-  get 'predictions/:id', to: 'predictions#purchase', as: 'prediction'
+  get 'predictions/:id', to: 'predictions#purchase'
   #get '/patients/:id', to: 'patients#show', as: 'patient'
   #get 'predictions/purchase/:id'
 

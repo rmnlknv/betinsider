@@ -8,18 +8,69 @@
 </head>
 <body>
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+<div id="wrapper">
 
-<% if user_signed_in? %>
-    <span>Здравствуйте, <%= current_user.email %>. Balance: <%= current_user.balance %></span>
-    <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
-<% else %>
-    <%= link_to 'Войти', new_user_session_path %> или <%= link_to 'Зарегистрироваться', new_user_registration_path %>
-<% end %>
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        BetInsider
+                    </a>
+                </li>
+                <li>
+                	<% if user_signed_in? %>
+    					<span>Здравствуйте, <%= current_user.email %>. Balance: <%= current_user.balance %></span>
+    					<%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
+					<% else %>
+    					<%= link_to 'Войти', new_user_session_path %>
+    					<%= link_to 'Зарегистрироваться', new_user_registration_path %>
+					<% end %>
+				</li>
+                <li>
+                    <a href="#">Прогнозы</a>
+                </li>
+                <li>
+                    <a href="#">Статистика</a>
+                </li>
+                <li>
+                    <a href="#">F.A.Q.</a>
+                </li>
+                <li>
+                    <a href="#">Контакты</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
 
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                    	<% flash.each do |name, message| %>
+							<%= content_tag :div, message, class: "alert alert-#{name}" %>
+						<% end %>
 
-<%= yield %>
+                        <%= yield %>
+
+                        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Скрыть/Показать Меню</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
 
 </body>
 </html>

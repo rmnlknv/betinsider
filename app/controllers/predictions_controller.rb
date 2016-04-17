@@ -10,17 +10,14 @@ class PredictionsController < ApplicationController
 
 	def create
 		@prediction = Prediction.new(prediction_params)
-
-    	respond_to do |format|
-    	  	if @prediction.save
-       			format.html { redirect_to action: 'index', notice: 'Prediction was successfully created.' }
-        		format.json { render :show, status: :created, location: @prediction }
-      		else
-          		format.html { render :new }
-        		format.json { render json: @prediction.errors, status: :unprocessable_entity }
-      		end
-    	end
-    end
+	  if @prediction.save
+      flash[:success] =  'Прогноз был успешно добавлен'
+   		redirect_to action: 'index'
+  	else
+      flash[:danger] = 'Возникла ошибка'
+      render :new
+  	end
+  end
 
     def purchase
     	@prediction = Prediction.find_by_id(params[:id])
@@ -36,6 +33,12 @@ class PredictionsController < ApplicationController
     		end
     	end
     end
+
+    def destroy
+        @prediction = Prediction.find(params[:id]).destroy
+        redirect_to action: 'index'
+    end
+
 
 	private
 	def prediction_params

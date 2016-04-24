@@ -7,3 +7,14 @@
 	background-color: #dff0d8;
 	border: 1px solid #ccc;
 }
+
+.spoiler-body {
+  padding: 5px;
+}
+
+.list-group > a:focus {
+  #color: red;
+  text-decoration: none;
+  background-color: white;
+}
+

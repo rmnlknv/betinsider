@@ -8,7 +8,7 @@
     </a>
     <a href="#" class="list-group-item">
       <h4 class="list-group-item-heading">Бонус к депозиту</h4>
-      <p class="list-group-item-text">Пополни баланс на 1,000 рублей и больше, и получи 500 рублей на счет в подарок!</p>
+      <p class="list-group-item-text">Пополни баланс на 1,000 рублей и больше, и получи 500 рублей на баланс в подарок!</p>
     </a>
     <a href="#" class="list-group-item">
       <h4 class="list-group-item-heading">Репост в ВКонтакте</h4>
@@ -71,13 +71,76 @@
 <div class="col-md-3 col-md-offset-1 text-center well">
   <h2 class="lead">Преимущества</h2>
   <ul class="list-group">
-    <li class="list-group-item">Высокая проходимость</li>
-    <li class="list-group-item">Реальная статистика</li>
-    <li class="list-group-item">Возврат денег (кэшбек)</li>
-    <li class="list-group-item">Поддержка</li>
-    <li class="list-group-item">Высокие коэффициенты</li>
+  <div class="list-group">
+    <!--<li class="list-group-item spoiler-trigger" data-toggle="collapse">
+      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Высокая проходимость
+    </li>-->
+    <a href="#" class="list-group-item spoiler-trigger text-left" data-toggle="collapse">
+      <!--<h4 class="list-group-item-heading">-->
+        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Высокая проходимость
+      <!--</h4>-->
+      <div class="spoiler-body panel-collapse collapse out">
+        <!--<div class="panel-body">-->
+          <p class="list-group-item-text text-justify">Ну реально очень высокая. Никита решает. Все сюда.</p>
+        <!--</div>-->
+      </div>
+    </a>
+    <!--<div class="panel-collapse collapse out">
+      <div class="panel-body list-group-item">
+        <p class="list-group-item-text">Ну реально очень высокая. Никита решает. Все сюда.</p>
+      </div>
+    </div>-->
+
+        <a href="#" class="list-group-item spoiler-trigger text-left" data-toggle="collapse">
+        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Реальная статистика
+      <div class="spoiler-body panel-collapse collapse out">
+        <!--<div class="panel-body">-->
+          <p class="list-group-item-text text-justify">В статистике обозначены все совершенные нами прогнозы. Они не удаляются и не редактируются. Убедитесь сами.</p>
+        <!--</div>-->
+      </div>
+    </a>
+
+    <a href="#" class="list-group-item spoiler-trigger text-left" data-toggle="collapse">
+      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Возврат денег (кэшбек)
+      <div class="spoiler-body panel-collapse collapse out">
+        <p class="list-group-item-text text-justify">В случае неуспеха спрогнозированной ставки - мы гарантируем возврат денег.</p>
+    </div>
+  </a>
+
+    <a href="#" class="list-group-item spoiler-trigger text-left" data-toggle="collapse">
+      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Поддержка
+      <div class="spoiler-body panel-collapse collapse out">
+        <p class="list-group-item-text text-justify">Мы всегда готовы помочь и ответить на все Ваши вопросы.</p>
+    </div>
+  </a>
+  
+  <a href="#" class="list-group-item spoiler-trigger text-left" data-toggle="collapse">
+      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Высокие коэффициенты
+      <div class="spoiler-body panel-collapse collapse out">
+        <p class="list-group-item-text text-justify">Все коэффициенты на момент прогноза выше 1.5</p>
+    </div>
+  </a>
+
+  </div>
   </ul>
 </div>
+
+<script>
+  $(".spoiler-trigger").click(function() {
+    $(this).children().next().collapse('toggle');
+  });
+
+  // custom class for toggled items
+ /* $(".list-group-item").click(function(){
+    if($(this).hasClass("toggled")){
+      $(this).removeClass("toggled");
+    } else {
+      $(this).addClass("toggled");  
+    }
+  });
+*/
+
+</script>
 
 
     <!-- <%= render "devise/shared/links" %> -->

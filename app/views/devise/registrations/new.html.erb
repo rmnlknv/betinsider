@@ -126,9 +126,14 @@
 </div>
 
 <script>
-  $(".spoiler-trigger").click(function() {
+ /*$(".spoiler-trigger").click(function() {
     $(this).children().next().collapse('toggle');
   });
+*/
+  $(".spoiler-trigger").click(function(){
+    $(this).siblings().children().next().collapse('hide');
+    $(this).children().next().collapse('toggle');
+});
 
   // custom class for toggled items
  /* $(".list-group-item").click(function(){

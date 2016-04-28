@@ -13,7 +13,7 @@
 
   <div class="jumbotron text-center">
       <h2><%= subscription.subtype %></h2>
-    	<h3><%= subscription.price.to_s + ' BM' %></h3> 
+    	<h3><%= subscription.price.round.to_s + ' BM' %></h3> 
     	<%= link_to content_tag(:button, "Оформить подписку", class: "btn btn-default btn-lg"), subscription, data: { confirm: 'Вы уверены, что хотите купить эту подписку? ' } %>
     
   </div>

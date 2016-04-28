@@ -19,7 +19,7 @@
                 <!--<li>-->
                 	<% if user_signed_in? %>
     					<li>Здравствуйте, <%= current_user.name %></li>
-                        <li>Баланс: <%= current_user.balance.to_s + " BM" %></li>
+                        <li>Баланс: <%= current_user.balance.round.to_s + " BM" %></li>
                         <li><a href="">Пополнить баланс</a></li>
 					<% else %>
     					<li><%= link_to 'Войти', new_user_session_path %></li>

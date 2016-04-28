@@ -27,7 +27,7 @@
         <td><% if owned || @subscribed %> <%= prediction.info %> <% else %> Для просмотра необходимо купить. <% end %></td>
         <td><%= prediction.date.strftime("%d.%m.%y") %></td>
         <td><%= prediction.date.strftime("%H:%M") %></td>
-        <td><% if owned || @subscribed %> - <% else %><%= @calculated_price.to_s + " BM" %><% end %></td>
+        <td><% if owned || @subscribed %> - <% else %><%= @calculated_price.round.to_s + " BM" %><% end %></td>
         <!--<td><%= prediction.status %></td>-->
         <td>
         <% if owned  || @subscribed %> 

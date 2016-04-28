@@ -13,6 +13,9 @@ Rails.application.routes.draw do
 
   get 'predictions/:id', to: 'predictions#purchase'
   get 'subscriptions/:id', to: 'subscriptions#purchase'
+
+  get 'faq', to: 'static_pages#faq'
+  get 'contact', to: 'static_pages#contact'
   #get '/patients/:id', to: 'patients#show', as: 'patient'
   #get 'predictions/purchase/:id'
 

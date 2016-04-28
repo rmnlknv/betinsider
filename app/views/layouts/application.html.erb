@@ -36,10 +36,10 @@
                     <a href="#">Статистика</a>
                 </li>
                 <li>
-                    <a href="#">F.A.Q.</a>
+                    <%= link_to 'F.A.Q.', faq_path %>
                 </li>
                 <li>
-                    <a href="#">Контакты</a>
+                    <%= link_to 'Контакты', contact_path %>
                 </li>
                 <% if user_signed_in? %>
                     <li><%= link_to 'Выйти', destroy_user_session_path, :method => :delete %></li>

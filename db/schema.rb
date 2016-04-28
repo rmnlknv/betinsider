@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160417215614) do
+ActiveRecord::Schema.define(version: 20160426095534) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,27 @@ ActiveRecord::Schema.define(version: 20160417215614) do
   end
 
   add_index "predictions_users", ["prediction_id", "user_id"], name: "index_predictions_users_on_prediction_id_and_user_id", using: :btree
+
+  create_table "purchases", id: false, force: :cascade do |t|
+    t.integer  "prediction_id"
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "subscribes", id: false, force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "subscription_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.string   "subtype",                            null: false
+    t.decimal  "price",      precision: 8, scale: 2, null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                                          default: "",    null: false

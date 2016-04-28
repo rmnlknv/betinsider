@@ -9,8 +9,10 @@ Rails.application.routes.draw do
   #get 'users/profile', as: 'user_root'
 
   resources :predictions, only: [:index, :new, :create, :destroy]
+  resources :subscriptions, only: [:index, :new, :create, :destroy]
 
   get 'predictions/:id', to: 'predictions#purchase'
+  get 'subscriptions/:id', to: 'subscriptions#purchase'
   #get '/patients/:id', to: 'patients#show', as: 'patient'
   #get 'predictions/purchase/:id'
 

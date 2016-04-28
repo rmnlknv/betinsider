@@ -1,53 +1,15 @@
 <h1>Список прогнозов</h1>
-<!--<table>
-  <thead>
-    <tr>
-      <th>Вид спорта</th>
-      <th>Тип</th>-
-      <th>Информация о ставке</th>
-      <th>Дата и время</th>
-      <th>Цена</th>
-      <th>Состояние</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @predictions.each do |prediction| %>
-    
-    <% if current_user.predictions.where(id: prediction).any? %> 
-        <% owned = true %> 
-    <% else %> 
-        <% owned = false %>
-    <% end %>
-
-      <tr>
-        <td><%= prediction.discipline %></td>
-        <td><%= prediction.bettype %></td>
-        <td><% if owned %> <%= prediction.info %> <% else %> have to buy <% end %></td>
-        <td><%= prediction.date.strftime("%d-%m-%Y %H-%M") %></td>
-        <td><%= prediction.price %></td>
-        <td><%= prediction.status %></td>
-        <td><% if owned %> Приобретено <% else %>
-        <%= link_to 'Buy', prediction, data: { confirm: 'Вы уверены, что хотите купить этот прогноз? ' } %><% end %></td>
-
-        <td><%= link_to 'Destroy', prediction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br> -->
 
 <div class="table-responsive">          
   <table class="table table-bordered">
     <thead>
       <tr>
-        <th>Спорт</th>
-        <th>Информация</th>
-        <th>Дата и время</th>
+        <th>Вид спорта</th>
+        <th>Прогноз</th>
+        <th>Дата матча</th>
+        <th>Время матча</th>
         <th>Цена</th>
-        <th>Состояние</th>
+        <!--<th>Состояние</th>-->
         <th>Покупка</th>
       </tr>
     </thead>
@@ -62,12 +24,13 @@
 
       <tr>
         <td><%= prediction.discipline %></td>
-        <td><% if owned %> <%= prediction.info %> <% else %> Для просмотра необходимо купить. <% end %></td>
-        <td><%= prediction.date.strftime("%d-%m-%Y %H-%M") %></td>
-        <td><%= prediction.price %></td>
-        <td><%= prediction.status %></td>
+        <td><% if owned || @subscribed %> <%= prediction.info %> <% else %> Для просмотра необходимо купить. <% end %></td>
+        <td><%= prediction.date.strftime("%d.%m.%y") %></td>
+        <td><%= prediction.date.strftime("%H:%M") %></td>
+        <td><% if owned || @subscribed %> - <% else %><%= @calculated_price.to_s + " BM" %><% end %></td>
+        <!--<td><%= prediction.status %></td>-->
         <td>
-        <% if owned %> 
+        <% if owned  || @subscribed %> 
           Куплено 
         <% else %>
           <%= link_to 'Купить', prediction, data: { confirm: 'Вы уверены, что хотите купить этот прогноз? ' } %>

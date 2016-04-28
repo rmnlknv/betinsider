@@ -1,7 +1,14 @@
 class PredictionsController < ApplicationController
 	before_action :authenticate_user!
 	def index
-		@predictions = Prediction.all
+#    @count_of_purchases = current_user.purchases.where({created_at: Time.now.midnight..(Time.now.midnight + 1.day) }).count
+		if (Subscription.subscribed?(current_user))
+    if (Subscription.subscribed?(current_user) > Time.now)
+      @subscribed = Subscription.subscribed?(current_user) 
+      end
+    end
+    @calculated_price = Prediction.calculate_price(current_user)
+    @predictions = Prediction.all
 	end
 
 	def new
@@ -20,7 +27,8 @@ class PredictionsController < ApplicationController
   end
 
     def purchase
-    	@prediction = Prediction.find_by_id(params[:id])
+=begin
+      @prediction = Prediction.find_by_id(params[:id])
   		if current_user.balance >= @prediction.price
   			current_user.balance -= @prediction.price
         current_user.predictions << @prediction
@@ -32,6 +40,17 @@ class PredictionsController < ApplicationController
         flash[:danger] = 'Недостаточно средств на балансе для покупки этого прогноза'
   			redirect_to action: 'index'
   		end
+=end
+
+      prediction = Prediction.find_by_id(params[:id])
+      if Prediction.prediction_purchase(prediction, current_user)
+        flash[:success] = 'Прогноз успешно куплен'
+        redirect_to action: 'index'
+      else
+        flash[:danger] = 'Недостаточно средств на балансе для покупки этого прогноза'
+        redirect_to action: 'index'
+      end
+
     end
 
     def destroy
@@ -43,5 +62,9 @@ class PredictionsController < ApplicationController
 	private
 	def prediction_params
       params.require(:prediction).permit(:discipline, :info, :date, :price, :status)
-    end
+  end
+
+#  def calculate_purchases
+#    current_user.purchases.where({created_at: Time.now.midnight..(Time.now.midnight + 1.day) }).count
+#  end
 end

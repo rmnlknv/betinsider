@@ -1,5 +1,10 @@
 class User < ActiveRecord::Base
-	has_and_belongs_to_many :predictions
+	has_many :purchases
+  has_many :predictions, through: :purchases
+
+  has_many :subscribes
+  has_many :subscriptions, through: :subscribes
+
 	validates :terms, :acceptance => true
 
   # Include default devise modules. Others available are:

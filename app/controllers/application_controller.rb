@@ -5,7 +5,6 @@ class ApplicationController < ActionController::Base
   before_action :configure_devise_permitted_parameters, if: :devise_controller?
   helper_method :time_converter
 
-
   def time_converter(time)
   daystime = time.day
   hourstime = time.hour

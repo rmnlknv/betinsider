@@ -1,0 +1,26 @@
+<% if user_signed_in? %>
+    <% if @user == current_user || current_user.is_admin? %>
+        <ul class="list-unstyled">
+          <li>id: <%= @user.id %></li>
+          <li>email: <%= @user.email %></li>
+          <li>name: <%= @user.name %></li>
+          <li>surname: <%= @user.surname %></li>
+          <li>balance: <%= @user.balance %></li>
+
+        </ul>
+    <% end %>
+
+    <% if current_user.is_admin? %>
+
+    	<h2>Добавление средств на счет</h2>
+        <%= form_tag action: "addmoney", id: @user do %>
+          <p><%= label_tag :amount, "Сумма: " %>
+          <%= text_field_tag :amount %></p>
+          <p><%= submit_tag "Добавить средства" %>
+        <% end %>
+
+        <p><%= link_to 'Назад к списку пользователей', users_path %></p>
+    <% end %>
+<% end %>
+
+

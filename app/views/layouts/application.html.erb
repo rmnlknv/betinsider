@@ -20,7 +20,11 @@
                 	<% if user_signed_in? %>
     					<li>Здравствуйте, <%= current_user.name %></li>
                         <li>Баланс: <%= current_user.balance.round.to_s + " BM" %></li>
-                        <li><a href="">Пополнить баланс</a></li>
+                        <% if current_user.is_admin? %>
+                          <li><a href="cpvls" style="color: red">Админ-панель</a></li>
+                        <% else %>
+                          <li><a href="">Пополнить баланс</a></li>
+                        <% end %>
 					<% else %>
     					<li><%= link_to 'Войти', new_user_session_path %></li>
     					<li><%= link_to 'Зарегистрироваться', new_user_registration_path %></li>
@@ -33,7 +37,7 @@
                     <%= link_to 'Подписки', subscriptions_path %>
                 </li>
                 <li>
-                    <a href="#">Статистика</a>
+                    <%= link_to 'Статистика', statistic_path %>
                 </li>
                 <li>
                     <%= link_to 'F.A.Q.', faq_path %>

@@ -1,15 +1,47 @@
 class PredictionsController < ApplicationController
-	before_action :authenticate_user!
+    include ApplicationHelper
+	before_action :authenticate_user!, except: [:statistic]
+  before_action :check_if_admin, only: [:new, :create, :accept, :decline]
+
 	def index
 #    @count_of_purchases = current_user.purchases.where({created_at: Time.now.midnight..(Time.now.midnight + 1.day) }).count
-		if (Subscription.subscribed?(current_user))
+		if current_user.is_admin?
+      @admin = true
+    else
+      @admin = false
+    end
+
+    if (Subscription.subscribed?(current_user))
     if (Subscription.subscribed?(current_user) > Time.now)
       @subscribed = Subscription.subscribed?(current_user) 
       end
     end
     @calculated_price = Prediction.calculate_price(current_user)
-    @predictions = Prediction.all
+    @predictions = Prediction.where(status: "")
 	end
+
+  def statistic
+    @predictions = Prediction.where.not(status: "")
+  end
+
+  def accept
+    prediction = Prediction.find(params[:id])
+    prediction.status = "win"
+    prediction.save
+    redirect_to predictions_path
+  end
+
+  def decline
+    prediction = Prediction.find(params[:id])
+    prediction.status = "lose"
+    prediction.save
+    prediction.purchases.each do |f|
+      user = User.find(f.user_id)
+      user.balance += f.price
+      user.save
+    end
+    redirect_to predictions_path
+  end
 
 	def new
 		@prediction = Prediction.new

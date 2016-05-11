@@ -11,6 +11,7 @@
         <th>Цена</th>
         <!--<th>Состояние</th>-->
         <th>Покупка</th>
+        <% if @admin %><th>Статус</th><% end %>
       </tr>
     </thead>
     <tbody>
@@ -36,6 +37,10 @@
           <%= link_to 'Купить', prediction, data: { confirm: 'Вы уверены, что хотите купить этот прогноз? ' } %>
         <% end %>
         </td>
+        <% if @admin %>
+          <td><%= link_to 'Прошел', {action: :accept, id: prediction}, class: 'green' %><br>
+          <%= link_to 'Не прошел', {action: :decline, id: prediction}, class: 'red' %></td>
+        <% end %>
       </tr>
       <% end %>
     </tbody>

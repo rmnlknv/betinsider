@@ -1,0 +1,16 @@
+Общее количество пользователей в базе данных: <%= @users.count %>
+<hr>
+<% @users.each do |f| %>
+    <p><b>ID:</b> <%= f.id %> 
+    <br>
+    <b>Email:</b> <%= f.email %> 
+    <br>
+    <b>Имя:</b> <%= f.name %> <b>Фамилия:</b>  <%= f.surname %>
+    <br>
+    <b>Баланс:</b> <%= f.balance.round %> BM
+    <br>
+    <b>Бонусный счет:</b> 
+    <br> 
+    <%= link_to 'ССЫЛКА НА ПРОФИЛЬ', f %></p>
+<hr>
+<% end %>

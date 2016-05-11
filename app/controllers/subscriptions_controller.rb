@@ -1,5 +1,7 @@
 class SubscriptionsController < ApplicationController
 	before_action :authenticate_user!
+  before_action :check_if_admin, only: [:new, :create, :destroy]
+
 
 	def index
     if (Subscription.subscribed?(current_user))

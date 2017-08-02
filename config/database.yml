@@ -24,4 +24,4 @@ production:
   <<: *default
   database: betinsider_production
   username: betinsider
-  password: <%= ENV['INVESTMASTER_DATABASE_PASSWORD'] %>
+  password: <%= ENV['BETINSIDER_DATABASE_PASSWORD'] %>

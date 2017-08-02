@@ -49,7 +49,7 @@ class Subscription < ActiveRecord::Base
       return Time.at(subscribe.created_at + 1.month)
     end
 
-    return "hmmm"
+    return false
   end
 
 end

@@ -1,8 +1,8 @@
-<h1>Список подписок</h1>
+<h1>List of subscriptions</h1>
 <% if @subscribed %>
   <div class="jumbotron text-center">
-	  <h2>Подписка оформлена</h2>
-      <h3>Время окончания действия: 
+	  <h2>Subscribed</h2>
+      <h3>The expiration time: 
         <%= @subscribed.strftime("%d.%m.%Y %H:%M") %>
       </h3>
   </div>
@@ -14,7 +14,7 @@
   <div class="jumbotron text-center">
       <h2><%= subscription.subtype %></h2>
     	<h3><%= subscription.price.round.to_s + ' BM' %></h3> 
-    	<%= link_to content_tag(:button, "Оформить подписку", class: "btn btn-default btn-lg"), subscription, data: { confirm: 'Вы уверены, что хотите купить эту подписку? ' } %>
+    	<%= link_to content_tag(:button, "Buy subscription", class: "btn btn-default btn-lg"), subscription, data: { confirm: 'Are you sure that you want to buy this subscription? ' } %>
     
   </div>
 

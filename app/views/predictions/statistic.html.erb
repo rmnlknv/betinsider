@@ -1,25 +1,24 @@
-<h1>Статистика прогнозов</h1>
+<h1>Statistic of predictions</h1>
 
 <div class="table-responsive">          
   <table class="table table-bordered">
     <thead>
       <tr>
-        <th>Вид спорта</th>
-        <th>Прогноз</th>
-        <th>Дата матча</th>
-        <th>Время матча</th>
-        <!--<th>Состояние</th>-->
-        <th>Статус</th>
+        <th>Sport</th>
+        <th>Prediction</th>
+        <th>Date of match</th>
+        <th>Time of match</th>
+        <th>Status</th>
       </tr>
     </thead>
     <tbody>
         <% @predictions.each do |prediction| %>
         <% if prediction.status == "win" %>
-          <% status = "Прошел" %>
+          <% status = "Success" %>
           <% color = "green" %>
         <% end %>
         <% if prediction.status == "lose" %>
-          <% status = "Не прошел" %>
+          <% status = "Fail" %>
           <% color = "red" %>
         <% end %> 
       <tr>
@@ -36,4 +35,3 @@
 
   <br>
 
-<!-- <%= link_to 'Добавить прогноз', new_prediction_path %> -->
